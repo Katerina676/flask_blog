@@ -1,11 +1,6 @@
 from app import db
 from datetime import datetime
-import re
-
-
-def slugify(s):
-    pattern = r'[^\w+]'
-    return re.sub(pattern, '-', s)
+from slugify import slugify
 
 
 class Post(db.Model):

@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Blueprint page
+Posts
 
 {% endblock %}
 
 {% block content_title %}
-Blueprint page
+Published posts
 
 {% endblock %}
 
 {% block content %}
-    Blueprint
+    {% for post in posts %}
+<ul><li>
+    <a href="{{ url_for('posts.post_detail', id=post.id) }}"> {{post.title}} {{post.created_at}} </a>
+</li></ul>
+{% endfor %}
 {% endblock %}
