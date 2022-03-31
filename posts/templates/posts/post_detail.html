@@ -11,5 +11,13 @@
 {% endblock %}
 
 {% block content %}
+<div class="tags">
+    {% for t in tag %}<a href="{{ url_for('posts.tag_detail', slug=t.slug) }}">
+    <span class="badge bg-info text-dark">{{t.title}}</span></a>
+    {% endfor %}
+</div>
+<div class="content">
     {{ post.text }}
+    </div>
+
 {% endblock %}

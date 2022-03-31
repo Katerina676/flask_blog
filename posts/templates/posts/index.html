@@ -13,7 +13,7 @@ Published posts
 {% block content %}
     {% for post in posts %}
 <ul><li>
-    <a href="{{ url_for('posts.post_detail', id=post.id) }}"> {{post.title}} {{post.created_at}} </a>
+    <a href="{{ url_for('posts.post_detail', slug=post.slug) }}"> {{post.title}} {{post.created_at}} </a>
 </li></ul>
 {% endfor %}
 {% endblock %}
