@@ -11,6 +11,13 @@ Published posts
 {% endblock %}
 
 {% block content %}
+
+<div class="col-md-6">
+    <form action="{{ url_for('posts.create_post')}}" method="GET">
+<button type="submit" class="btn btn-lg btn-primary">Create post</button>
+    </form>
+</div>
+
     {% for post in posts %}
 <ul><li>
     <a href="{{ url_for('posts.post_detail', slug=post.slug) }}"> {{post.title}} {{post.created_at}} </a>

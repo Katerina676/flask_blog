@@ -1,13 +1,42 @@
 from flask import Blueprint
 from flask import render_template
 from models import Post, Tag
+from flask import request
+from .forms import PostForm
+from app import db
+from flask import redirect, url_for
+
 
 posts = Blueprint('posts', __name__, template_folder='templates')
 
 
+@posts.route('/create', methods=['POST', 'GET'])
+def create_post():
+
+    if request.method == 'POST':
+        title = request.form['title']
+        text = request.form['text']
+
+        try:
+            post = Post(title=title, text=text)
+            db.session.add(post)
+            db.session.commit()
+        except:
+            print('Something wrong')
+
+        return redirect( url_for('posts.index') )
+
+    form = PostForm()
+    return render_template('posts/create_post.html', form=form)
+
+
 @posts.route('/')
 def index():
-    posts = Post.query.all()
+    q = request.args.get('q')
+    if q:
+        posts = Post.query.filter(Post.title.contains(q) | Post.text.contains(q)).all()
+    else:
+        posts = Post.query.order_by(Post.created_at.desc())
     return render_template('posts/index.html', posts=posts)
 
 
