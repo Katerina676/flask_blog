@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, TextAreaField
+from wtforms import Form, StringField, TextAreaField, FileField
 
 
 class PostForm(Form):

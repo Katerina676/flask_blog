@@ -18,9 +18,36 @@ Published posts
     </form>
 </div>
 
-    {% for post in posts %}
+    {% for post in pages.items %}
 <ul><li>
     <a href="{{ url_for('posts.post_detail', slug=post.slug) }}"> {{post.title}} {{post.created_at}} </a>
 </li></ul>
 {% endfor %}
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+    <li
+            {% if not pages.has_prev %}
+            class="page-item disabled"
+        {% endif %}
+    >
+      <a href="./?page={{ pages.prev_num}}" class="page-link">Previous</a>
+    </li>
+      {% for page in pages.iter_pages() %}
+          <li {% if page == pages.page %} class="page-item" {% endif %}><a class="page-link" href="./?page={{ page}}"
+          >{{ page}}</a></li>
+      {% endfor %}
+
+
+    <li {% if not pages.has_next %}
+            class="page-item"
+    {% endif %} >
+      <a class="page-link" href="./?page={{ pages.next_num}}">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
 {% endblock %}
