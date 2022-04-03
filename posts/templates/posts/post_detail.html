@@ -11,6 +11,14 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="col-md-6">
+    <form action="{{ url_for('posts.post_edit', slug=post.slug)}}" method="GET">
+<button type="submit" class="btn btn-lg btn-primary">Edit post</button>
+    </form>
+</div>
+
+
 <div class="tags">
     {% for t in tag %}<a href="{{ url_for('posts.tag_detail', slug=t.slug) }}">
     <span class="badge bg-info text-dark">{{t.title}}</span></a>
